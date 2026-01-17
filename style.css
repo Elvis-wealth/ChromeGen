@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&display=swap');
+
+:root {
+    --bg-app: #f8f9fa;
+    --bg-white: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --accent-blue: #0066FF; /* Example blue from Screenshot */
+    --border-color: #e0e0e0;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-float: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, handle inside main */
+}
+
+/* --- Layout --- */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 64px;
+    background-color: var(--bg-white);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    gap: 32px;
+    flex-shrink: 0;
+}
+
+.sidebar-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.sidebar-icon:hover, .sidebar-icon.active {
+    color: var(--accent-blue);
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1; /* Push settings to bottom */
+}
+
+.logo .sidebar-icon {
+    color: var(--accent-blue);
+    width: 28px;
+    height: 28px;
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 40px;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Header */
+.top-header {
+    margin-bottom: 32px;
+}
+
+.top-header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.top-header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.tab-container {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    position: relative;
+}
+
+.tab-btn.active {
+    color: var(--accent-blue);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-blue);
+}
+
+.tab-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* Workspace cards */
+.workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 100px; /* Space for floating bar */
+}
+
+/* Base Color Card */
+.base-color-card {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.color-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    background-color: #C74B6D; /* Default */
+}
+
+.color-info h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.hex-value {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.color-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.section-label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+/* Palette Grid */
+.palette-grid {
+    display: flex;
+    height: 400px; /* Taller as per design */
+    width: 100%;
+    gap: 2px; /* Slight separation if desired, or 0 for seamless */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.palette-stripe {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Bottom alignment for info */
+    align-items: center;
+    padding: 24px;
+    position: relative;
+    transition: flex 0.3s ease;
+}
+
+.palette-stripe:hover {
+    flex: 1.2; /* Expand slightly on hover? Optional */
+}
+
+.stripe-actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.palette-stripe:hover .stripe-actions {
+    opacity: 1;
+}
+
+.stripe-actions i {
+    color: white;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.stripe-actions i:hover {
+    transform: scale(1.1);
+}
+
+.stripe-info {
+    text-align: center;
+    color: white; /* Assuming dark colors, might need contrast logic later */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.stripe-hex {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.stripe-name {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* Floating Bar */
+.floating-bar {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-white);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-float);
+    z-index: 100;
+    margin-left: 32px; /* Offset for sidebar width roughly */
+}
+
+.generate-btn {
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.generate-btn:hover {
+    background-color: #0056e0;
+}
+
+.generate-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background-color: var(--border-color);
+}
+
+.control-icons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.control-icons i {
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.control-icons i:hover {
+    color: var(--text-primary);
+}
+
+.record-btn {
+    width: 12px;
+    height: 12px;
+    background-color: #ff3b30;
+    border-radius: 50%;
+    cursor: pointer;
+}
