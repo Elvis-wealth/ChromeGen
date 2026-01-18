@@ -1,0 +1,239 @@
+
+/* ========================================================================== */
+/*                         EXPORT MODAL STYLES                                */
+/* ========================================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-container {
+    background: linear-gradient(135deg, #1a1a1f 0%, #18181b 100%);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 600px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    padding: 1.75rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(168, 85, 247, 0.05);
+}
+
+.modal-header h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+}
+
+.modal-header h2 i {
+    width: 22px;
+    height: 22px;
+    color: #a855f7;
+}
+
+.modal-close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #9ca3af;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.modal-close-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    transform: rotate(90deg);
+}
+
+.modal-close-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.export-options-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.export-option-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    width: 100%;
+}
+
+.export-option-card:hover {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+    transform: translateX(8px);
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.15);
+}
+
+.export-option-card:active {
+    transform: translateX(8px) scale(0.98);
+}
+
+.option-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    transition: all 0.25s ease;
+}
+
+.export-option-card:hover .option-icon {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.15));
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: scale(1.05);
+}
+
+.option-icon i {
+    width: 28px;
+    height: 28px;
+    color: #a855f7;
+}
+
+.option-content {
+    flex: 1;
+}
+
+.option-content h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 0.35rem 0;
+    transition: color 0.2s ease;
+}
+
+.export-option-card:hover .option-content h3 {
+    color: #c084fc;
+}
+
+.option-content p {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Success feedback animation */
+@keyframes successPulse {
+    0%, 100% { 
+        background: rgba(34, 197, 94, 0.1);
+        border-color: rgba(34, 197, 94, 0.3);
+    }
+    50% { 
+        background: rgba(34, 197, 94, 0.2);
+        border-color: rgba(34, 197, 94, 0.5);
+    }
+}
+
+.export-option-card.copied {
+    animation: successPulse 0.6s ease;
+}
+
+.export-option-card.copied .option-icon {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.15));
+    border-color: rgba(34, 197, 94, 0.4);
+}
+
+.export-option-card.copied .option-icon i {
+    color: #22c55e;
+}
+
+.export-option-card.copied .option-content h3 {
+    color: #22c55e;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .modal-container {
+        width: 95%;
+        max-width: none;
+        margin: 1rem;
+    }
+    
+    .modal-header {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.15rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+    
+    .export-option-card {
+        padding: 1.25rem;
+    }
+    
+    .option-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .option-icon i {
+        width: 24px;
+        height: 24px;
+    }
+}

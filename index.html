@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="export-dropdown-menu.css">
 </head>
 <body>
     <div class="app-container">
@@ -457,17 +458,17 @@
         </main>
     </div>
 
-    <!-- Export Dropdown Menu -->
-    <div class="export-dropdown hidden" id="export-dropdown">
-        <button class="export-menu-item" id="export-save-image">
+    <!-- Export Dropdown -->
+    <div class="export-dropdown-menu hidden" id="export-dropdown">
+        <button class="export-dropdown-item" id="export-save-image">
             <i data-lucide="image"></i>
             <span>Save Image</span>
         </button>
-        <button class="export-menu-item" id="export-copy-css">
+        <button class="export-dropdown-item" id="export-copy-css">
             <i data-lucide="code"></i>
             <span>Copy CSS</span>
         </button>
-        <button class="export-menu-item" id="export-copy-json">
+        <button class="export-dropdown-item" id="export-copy-json">
             <i data-lucide="file-json"></i>
             <span>Copy JSON</span>
         </button>

@@ -768,8 +768,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return currentMoodPalette.length > 0 ? currentMoodPalette : builderPalette;
     }
 
-    // Generate CSS code
-    function generateCSSCode(palette) {
+    // Generate CSS Variables (Root Syntax)
+    function generateCSSVariables(palette) {
         if (!palette || palette.length === 0) return '';
         
         let css = ':root {\n';
@@ -840,17 +840,19 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
     }
 
-    // Copy to clipboard with feedback
-    function copyToClipboard(text, button) {
+    // Copy to clipboard with visual feedback
+    function copyToClipboardWithFeedback(text, button) {
         navigator.clipboard.writeText(text).then(() => {
             const originalHTML = button.innerHTML;
+            button.classList.add('copied');
             button.innerHTML = '<i data-lucide="check"></i><span>Copied!</span>';
             lucide.createIcons();
             
             setTimeout(() => {
+                button.classList.remove('copied');
                 button.innerHTML = originalHTML;
                 lucide.createIcons();
-            }, 2000);
+            }, 1500);
         });
     }
 
@@ -893,11 +895,11 @@ document.addEventListener('DOMContentLoaded', () => {
         exportCopyCSSBtn.addEventListener('click', () => {
             const palette = getActivePalette();
             if (palette && palette.length > 0) {
-                const css = generateCSSCode(palette);
-                copyToClipboard(css, exportCopyCSSBtn);
+                const css = generateCSSVariables(palette);
+                copyToClipboardWithFeedback(css, exportCopyCSSBtn);
                 setTimeout(() => {
                     exportDropdown.classList.add('hidden');
-                }, 2000);
+                }, 1500);
             }
         });
     }
@@ -908,10 +910,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const palette = getActivePalette();
             if (palette && palette.length > 0) {
                 const json = generateJSONCode(palette);
-                copyToClipboard(json, exportCopyJSONBtn);
+                copyToClipboardWithFeedback(json, exportCopyJSONBtn);
                 setTimeout(() => {
                     exportDropdown.classList.add('hidden');
-                }, 2000);
+                }, 1500);
             }
         });
     }
