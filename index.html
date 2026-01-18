@@ -1,86 +1,478 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chromegen - Professional Color Palette Generator</title>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChromeGen - Professional Palette Generator</title>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Icons (Lucide Icons) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <div class="app-container">
-      <!-- Sidebar Navigation -->
-      <nav class="sidebar">
-        <div class="logo-container">
-          <img src="ChromeGen Logo.svg" alt="Chromegen" class="logo-mark-img">
-        </div>
+        <!-- Top Navigation Bar -->
+        <header class="app-header">
+            <div class="logo-area">
+                <!-- Using text fallback for now, will enhance if SVG is confirmed usable -->
+                <div class="logo-mark">
+                    <div class="logo-icon"></div>
+                </div>
+                <span class="logo-text">CHROMEGEN</span>
+            </div>
 
-        <div class="nav-links">
-          <!-- Primary Actions -->
-          <button
-            class="nav-item active"
-            aria-label="Generator"
-            data-tooltip="Generator"
-          >
-            <i data-lucide="palette"></i>
-          </button>
+            <div class="header-actions">
+                <button class="btn-ghost" id="header-export-btn" aria-label="Export">
+                    <i data-lucide="download"></i> 
+                    <span>Export</span>
+                </button>
+                <button class="btn-icon" aria-label="Settings">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
+        </header>
 
-          <button
-            class="nav-item"
-            aria-label="Explore Palettes"
-            data-tooltip="Explore"
-          >
-            <i data-lucide="compass"></i>
-          </button>
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Background Glow Effects (Diagonals like reference) -->
+            <div class="glow-effect glow-1"></div>
+            <div class="glow-effect glow-2"></div>
+            <div class="glow-effect glow-3"></div>
 
-          <button
-            class="nav-item"
-            aria-label="Visualizer"
-            data-tooltip="Visualizer"
-          >
-            <i data-lucide="eye"></i>
-          </button>
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <h1 class="hero-title">Generate your next<br>masterpiece.</h1>
+                
+                <!-- Navigation Tabs (Pills) -->
+                <div class="nav-tabs-wrapper">
+                    <div class="nav-tabs">
+                        <button class="tab-btn" data-tab="manual">
+                            <i data-lucide="wand-2"></i>
+                            Manual Builder
+                        </button>
+                        <button class="tab-btn active" data-tab="ai">
+                           <i data-lucide="sparkles"></i>  
+                            Mood Builder
+                        </button>
+                        <button class="tab-btn" data-tab="system">
+                            <i data-lucide="layout-dashboard"></i> 
+                            Design Systems
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-          <button
-            class="nav-item"
-            aria-label="Saved Palettes"
-            data-tooltip="Saved"
-          >
-            <i data-lucide="bookmark"></i>
-          </button>
-        </div>
+            <!-- Central Glass Card -->
+            <div class="glass-card">
+                <div class="card-body">
+                    
+                    <!-- TAB VIEW: Mood Builder -->
+                    <div id="view-ai" class="view-section active">
+                        <div class="mood-builder-container">
+                            <div class="mood-view-header">
+                                <h2><i data-lucide="sparkles"></i> Mood-Based Palette Generator</h2>
+                                <p>Generate color palettes based on brand personality and emotional qualities</p>
+                            </div>
 
-        <div class="nav-footer">
-          <button
-            class="nav-item"
-            aria-label="Settings"
-            data-tooltip="Settings"
-          >
-            <i data-lucide="settings"></i>
-          </button>
-          <button class="nav-item" aria-label="Help" data-tooltip="Help">
-            <i data-lucide="circle-help"></i>
-          </button>
-        </div>
-      </nav>
+                            <!-- MOOD SELECTION -->
+                            <div class="mood-section">
+                                <label class="section-label">SELECT BRAND MOOD</label>
+                                <div class="mood-grid">
+                                    <button class="mood-card selected" data-mood="energetic">
+                                        <h3>Energetic</h3>
+                                        <p>Vibrant, high-energy colors that evoke action and excitement</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="calm">
+                                        <h3>Calm</h3>
+                                        <p>Peaceful, relaxing colors that create tranquility</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="professional">
+                                        <h3>Professional</h3>
+                                        <p>Corporate, trustworthy colors for business contexts</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="luxurious">
+                                        <h3>Luxurious</h3>
+                                        <p>Rich, premium colors that convey sophistication</p>
+                                    </button>
+                                    
+                                    <button class="mood-card" data-mood="natural">
+                                        <h3>Natural</h3>
+                                        <p>Earthy, organic colors inspired by nature</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="creative">
+                                        <h3>Creative</h3>
+                                        <p>Playful, imaginative colors that inspire innovation</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="trustworthy">
+                                        <h3>Trustworthy</h3>
+                                        <p>Stable, reliable colors that build confidence</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="modern">
+                                        <h3>Modern</h3>
+                                        <p>Sleek, contemporary colors with minimal aesthetics</p>
+                                    </button>
 
-      <!-- Main Content Placeholder -->
-      <main class="main-content">
-        <!-- Content will be injected here -->
-      </main>
+                                    <button class="mood-card" data-mood="friendly">
+                                        <h3>Friendly</h3>
+                                        <p>Warm, welcoming colors that feel approachable</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="elegant">
+                                        <h3>Elegant</h3>
+                                        <p>Refined, sophisticated colors with timeless appeal</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="spiritual">
+                                        <h3>Spiritual</h3>
+                                        <p>Ethereal, mystical colors for introspection</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="bold">
+                                        <h3>Bold</h3>
+                                        <p>Strong, confident colors with high impact</p>
+                                    </button>
+
+                                    <button class="mood-card" data-mood="playful">
+                                        <h3>Playful</h3>
+                                        <p>Fun, cheerful colors for youthful and energetic brands</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="minimalist">
+                                        <h3>Minimalist</h3>
+                                        <p>Clean, restrained colors with subtle sophistication</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="vintage">
+                                        <h3>Vintage</h3>
+                                        <p>Nostalgic, heritage colors with warm, muted tones</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="warm">
+                                        <h3>Warm</h3>
+                                        <p>Inviting, cozy colors for hospitality and comfort</p>
+                                    </button>
+
+                                    <button class="mood-card" data-mood="fresh">
+                                        <h3>Fresh</h3>
+                                        <p>Clean, vibrant colors that evoke renewal and vitality</p>
+                                    </button>
+                                    <button class="mood-card" data-mood="sophisticated">
+                                        <h3>Sophisticated</h3>
+                                        <p>Polished, upscale colors with contemporary refinement</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- COUNT SELECTION -->
+                            <div class="mood-section">
+                                <div class="num-header-row">
+                                    <label class="section-label">NUMBER OF COLORS</label>
+                                    <span class="num-indicator" id="mood-count-display">5</span>
+                                </div>
+                                <div class="num-selector">
+                                    <button class="num-btn" data-count="3">3</button>
+                                    <button class="num-btn" data-count="4">4</button>
+                                    <button class="num-btn active" data-count="5">5</button>
+                                    <button class="num-btn" data-count="6">6</button>
+                                    <button class="num-btn" data-count="7">7</button>
+                                    <button class="num-btn" data-count="8">8</button>
+                                </div>
+                                <p class="num-hint">Ideal range: 3-6 colors for brand palettes</p>
+                            </div>
+
+                            <button class="generate-full-btn" id="ai-generate-btn">
+                                <i data-lucide="sparkles"></i> Generate Palette
+                            </button>
+
+                            <!-- RESULT AREA (Initially Hidden) -->
+                            <div class="manual-block builder-area hidden" id="mood-result-panel" style="margin-top: 1.5rem; border-color: rgba(255,255,255,0.08);">
+                                
+                                <div class="mood-result-header">
+                                    <div class="header-left">
+                                        <h3>Generated Palette</h3>
+                                        <div class="mood-meta-info" id="mood-meta">5 colors • Fresh mood</div>
+                                    </div>
+                                    <div class="result-actions">
+                                        <button class="btn-action-sm purple" id="mood-new-btn">
+                                            <i data-lucide="refresh-cw"></i> New
+                                        </button>
+                                        <button class="btn-action-sm green" id="mood-save-btn">
+                                            <i data-lucide="bookmark"></i> Save
+                                        </button>
+                                        <button class="btn-action-sm blue" id="mood-visualizer-btn">
+                                            <i data-lucide="layout-template"></i> Visualizer
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="builder-grid" id="mood-result-grid">
+                                    <!-- Dynamic Color Cards -->
+                                </div>
+
+                                <div class="mood-result-footer">
+                                    <div class="export-wrapper-bottom">
+                                        <button class="more-options-btn" id="mood-export-trigger">
+                                            <i data-lucide="more-horizontal"></i>
+                                        </button>
+                                        
+                                        <!-- Expanded Export Menu -->
+                                        <div class="export-menu hidden" id="mood-export-menu" style="bottom: 110%; left: 0;">
+                                            <div class="menu-options-header">COPY TO CLIPBOARD</div>
+                                            <div class="menu-group">
+                                                <button class="menu-item"><i data-lucide="file-code"></i> Copy CSS Variables</button>
+                                                <button class="menu-item"><i data-lucide="file-json"></i> Copy SCSS Map</button>
+                                                <button class="menu-item"><i data-lucide="code"></i> Copy JavaScript</button>
+                                                <button class="menu-item"><i data-lucide="copy"></i> Copy RGB Values</button>
+                                                <button class="menu-item"><i data-lucide="clipboard"></i> Copy HSL Values</button>
+                                            </div>
+                                            
+                                            <div class="menu-options-header">DESIGN SOFTWARE</div>
+                                            <div class="menu-group">
+                                                <button class="menu-item with-desc">
+                                                    <i data-lucide="download"></i>
+                                                    <div class="menu-text">
+                                                        <span class="title">SVG (Figma, Illustrator)</span>
+                                                        <span class="desc">Vector format for design software</span>
+                                                    </div>
+                                                </button>
+                                                <button class="menu-item with-desc">
+                                                    <i data-lucide="file-text"></i>
+                                                    <div class="menu-text">
+                                                        <span class="title">PDF (Universal)</span>
+                                                        <span class="desc">Print-ready format for all design software</span>
+                                                    </div>
+                                                </button>
+                                                <button class="menu-item with-desc">
+                                                    <i data-lucide="palette"></i>
+                                                    <div class="menu-text">
+                                                        <span class="title">Sketch Palette</span>
+                                                        <span class="desc">Native color palette for Sketch</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+    
+                                            <div class="menu-options-header">SHARE & EXPORT</div>
+                                            <div class="menu-group">
+                                                <button class="menu-item with-desc">
+                                                    <i data-lucide="camera"></i>
+                                                    <div class="menu-text">
+                                                        <span class="title">Social Media Image</span>
+                                                        <span class="desc">Share on Instagram, Twitter, etc.</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB VIEW: Manual Input (Builder) -->
+                    <div id="view-manual" class="view-section" style="display: none;">
+                        
+                        <!-- Section 1: Base Color -->
+                        <div class="manual-block base-selection">
+                            <div class="base-header">
+                                <div class="base-swatch-wrapper">
+                                    <input type="color" id="base-picker" value="#3b82f6">
+                                    <div class="base-swatch" id="base-preview" style="background-color: #3b82f6;"></div>
+                                </div>
+                                <div class="base-info">
+                                    <h3>Base Color</h3>
+                                    <input type="text" id="hex-input" value="#3b82f6" class="bare-input" maxlength="7">
+                                </div>
+                            </div>
+                            <p class="section-desc">Use the buttons below to add colors to your custom palette.</p>
+                        </div>
+
+                        <!-- Section 2: Variations -->
+                        <div class="manual-block variations-panel">
+                            <div class="panel-header">
+                                <h3>Add Colors to Palette</h3>
+                                <p class="section-desc">Build your palette using variations and harmonies</p>
+                            </div>
+
+                            <!-- Basic Vars -->
+                            <div class="var-group">
+                                <h4>BASIC VARIATIONS</h4>
+                                <div class="chip-grid">
+                                    <button class="var-chip" data-type="base">+ Base Color</button>
+                                    <button class="var-chip" data-type="lighter">+ Lighter</button>
+                                    <button class="var-chip" data-type="light">+ Light</button>
+                                    <button class="var-chip" data-type="dark">+ Dark</button>
+                                    <button class="var-chip" data-type="darker">+ Darker</button>
+                                    <button class="var-chip" data-type="shade">+ Shade</button>
+                                    <button class="var-chip" data-type="tint">+ Tint</button>
+                                    <button class="var-chip" data-type="highlight">+ Highlight</button>
+                                </div>
+                            </div>
+
+                            <!-- Harmonies -->
+                            <div class="var-group">
+                                <h4>HARMONY COLORS</h4>
+                                <div class="chip-grid">
+                                    <button class="var-chip blue-chip" data-type="complementary">+ Complementary</button>
+                                    <button class="var-chip blue-chip" data-type="comp-light">+ Comp. Light</button>
+                                    <button class="var-chip blue-chip" data-type="comp-dark">+ Comp. Dark</button>
+                                    <button class="var-chip blue-chip" data-type="triadic-1">+ Triadic 1</button>
+                                    <button class="var-chip blue-chip" data-type="triadic-2">+ Triadic 2</button>
+                                    <button class="var-chip blue-chip" data-type="analogous-warm">+ Analogous Warm</button>
+                                    <button class="var-chip blue-chip" data-type="analogous-cool">+ Analogous Cool</button>
+                                    <button class="var-chip blue-chip" data-type="split-1">+ Split Comp 1</button>
+                                    <button class="var-chip blue-chip" data-type="split-2">+ Split Comp 2</button>
+                                </div>
+                            </div>
+
+                            <!-- Accents -->
+                            <div class="var-group">
+                                <h4>ACCENT COLORS</h4>
+                                <div class="chip-grid">
+                                    <button class="var-chip green-chip" data-type="saturated">+ Saturated</button>
+                                    <button class="var-chip green-chip" data-type="desaturated">+ Desaturated</button>
+                                    <button class="var-chip green-chip" data-type="warm">+ Warm Tone</button>
+                                    <button class="var-chip green-chip" data-type="cool">+ Cool Tone</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Builder Grid (Initially Hidden) -->
+                        <div class="manual-block builder-area hidden" id="builder-panel">
+                            <div class="builder-header">
+                                <div class="builder-title">
+                                    <h3>Your Builder Palette</h3>
+                                    <span class="count-badge" id="palette-count">0 colors</span>
+                                </div>
+                                <div class="builder-actions">
+                                    <button class="action-btn danger">
+                                        <i data-lucide="trash-2"></i> Clear
+                                    </button>
+                                    <button class="action-btn success">
+                                        <i data-lucide="bookmark"></i> Save
+                                    </button>
+                                    <button class="action-btn primary">
+                                        <i data-lucide="external-link"></i> Visualizer
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="builder-grid" id="builder-grid">
+                                <!-- Dynamic Color Cards will be injected here -->
+                            </div>
+
+                            <!-- Footer / Options Trigger -->
+                            <div class="builder-footer-area">
+                                <div class="export-wrapper">
+                                    <button class="more-options-btn" id="export-trigger">
+                                        <i data-lucide="more-horizontal"></i>
+                                    </button>
+                                    
+                                    <!-- Export Menu Popup -->
+                                    <div class="export-menu hidden" id="export-menu">
+                                        <div class="menu-group">
+                                            <button class="menu-item"><i data-lucide="code"></i> Copy HEX Values</button>
+                                            <button class="menu-item"><i data-lucide="copy"></i> Copy RGB Values</button>
+                                            <button class="menu-item"><i data-lucide="clipboard"></i> Copy HSL Values</button>
+                                        </div>
+                                        
+                                        <div class="menu-options-header">DESIGN SOFTWARE</div>
+                                        <div class="menu-group">
+                                            <button class="menu-item with-desc">
+                                                <i data-lucide="download"></i>
+                                                <div class="menu-text">
+                                                    <span class="title">SVG (Figma, Illustrator)</span>
+                                                    <span class="desc">Vector format for design software</span>
+                                                </div>
+                                            </button>
+                                            <button class="menu-item with-desc">
+                                                <i data-lucide="file-text"></i>
+                                                <div class="menu-text">
+                                                    <span class="title">PDF (Universal)</span>
+                                                    <span class="desc">Print-ready format.</span>
+                                                </div>
+                                            </button>
+                                            <button class="menu-item with-desc">
+                                                <i data-lucide="palette"></i>
+                                                <div class="menu-text">
+                                                    <span class="title">Sketch Palette</span>
+                                                    <span class="desc">Native color palette for Sketch</span>
+                                                </div>
+                                            </button>
+                                        </div>
+
+                                        <div class="menu-options-header">SHARE & EXPORT</div>
+                                        <div class="menu-group">
+                                            <button class="menu-item with-desc">
+                                                <i data-lucide="camera"></i>
+                                                <div class="menu-text">
+                                                    <span class="title">Social Media Image</span>
+                                                    <span class="desc">Share on Instagram, Twitter, etc.</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Builder Tips (Initially Hidden) -->
+                        <div class="manual-block builder-tips hidden" id="tips-panel">
+                             <div class="tips-header">
+                                <i data-lucide="lightbulb" class="tip-icon"></i>
+                                <h3>Builder Tips</h3>
+                             </div>
+                             <ul class="tips-list">
+                                <li>Click any button multiple times to add variations</li>
+                                <li>Build palettes with 3-8 colors for best results</li>
+                                <li>Mix basic variations with harmony colors for depth</li>
+                                <li>Use highlights and shades to create contrast</li>
+                                <li>Duplicates are automatically filtered out</li>
+                             </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB VIEW: Design System -->
+                    <div id="view-system" class="view-section" style="display: none;">
+                        <div class="system-header">
+                            <h2>Design System</h2>
+                            <p class="subtitle">Generated color scales and tokens.</p>
+                        </div>
+
+                        <!-- Component Preview -->
+                        <div id="system-preview-container" class="preview-wrapper">
+                             <!-- Components injected via JS -->
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div class="system-divider" style="margin: 3rem 0; border-top: 1px solid rgba(255,255,255,0.08);"></div>
+
+                        <div id="system-scales-container" class="scales-wrapper">
+                            <!-- Scales injected here -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Export Dropdown Menu -->
+    <div class="export-dropdown hidden" id="export-dropdown">
+        <button class="export-menu-item" id="export-save-image">
+            <i data-lucide="image"></i>
+            <span>Save Image</span>
+        </button>
+        <button class="export-menu-item" id="export-copy-css">
+            <i data-lucide="code"></i>
+            <span>Copy CSS</span>
+        </button>
+        <button class="export-menu-item" id="export-copy-json">
+            <i data-lucide="file-json"></i>
+            <span>Copy JSON</span>
+        </button>
     </div>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
