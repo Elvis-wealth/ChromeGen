@@ -1,151 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChromeGen - Palette Builder</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Load Lucide Icons -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chromegen - Professional Color Palette Generator</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons (Lucide Icons) -->
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="app-container">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="logo">
-                <!-- Placeholder for Logo Icon -->
-                <i data-lucide="aperture" class="sidebar-icon active"></i>
-            </div>
-            
-            <nav class="nav-menu">
-                <div class="nav-item active">
-                    <i data-lucide="palette" class="sidebar-icon"></i>
-                </div>
-                <div class="nav-item">
-                    <i data-lucide="wand-2" class="sidebar-icon"></i>
-                </div>
-                <div class="nav-item">
-                    <i data-lucide="bookmark" class="sidebar-icon"></i>
-                </div>
-                <div class="nav-item">
-                    <i data-lucide="layout-grid" class="sidebar-icon"></i>
-                </div>
-            </nav>
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar">
+        <div class="logo-container">
+          <img src="ChromeGen Logo.svg" alt="Chromegen" class="logo-mark-img">
+        </div>
 
-            <div class="settings">
-                <i data-lucide="settings" class="sidebar-icon"></i>
-            </div>
-        </aside>
+        <div class="nav-links">
+          <!-- Primary Actions -->
+          <button
+            class="nav-item active"
+            aria-label="Generator"
+            data-tooltip="Generator"
+          >
+            <i data-lucide="palette"></i>
+          </button>
 
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
-            <header class="top-header">
-                <h1>Palette Builder</h1>
-                <p>Generate your preferred colour palette</p>
-                
-                <div class="tab-container">
-                    <button class="tab-btn active"><i data-lucide="pen-tool"></i> Manual Builder</button>
-                    <button class="tab-btn"><i data-lucide="sparkles"></i> Mood Builder</button>
-                </div>
-            </header>
+          <button
+            class="nav-item"
+            aria-label="Explore Palettes"
+            data-tooltip="Explore"
+          >
+            <i data-lucide="compass"></i>
+          </button>
 
-            <div class="workspace">
-                <!-- BASE COLOR CARD -->
-                <section class="base-color-card">
-                    <div class="color-preview" id="base-color-preview"></div>
-                    <div class="color-info">
-                        <h2>Base Colour</h2>
-                        <p class="hex-value" id="base-hex">#C74B6D</p>
-                        <p class="color-meta">Burgundy • Warm Saturation</p>
-                    </div>
-                </section>
+          <button
+            class="nav-item"
+            aria-label="Visualizer"
+            data-tooltip="Visualizer"
+          >
+            <i data-lucide="eye"></i>
+          </button>
 
-                <div class="section-label">Generated Palette</div>
+          <button
+            class="nav-item"
+            aria-label="Saved Palettes"
+            data-tooltip="Saved"
+          >
+            <i data-lucide="bookmark"></i>
+          </button>
+        </div>
 
-                <!-- PALETTE GRID -->
-                <div class="palette-grid" id="palette-grid">
-                    <!-- Palette items will be generated here by JS -->
-                    <!-- Hardcoded for Initial Visual Check -->
-                    <div class="palette-stripe" style="background-color: #C74B6D;">
-                        <div class="stripe-actions">
-                            <i data-lucide="heart"></i>
-                            <i data-lucide="copy"></i>
-                            <i data-lucide="trash-2"></i>
-                        </div>
-                        <div class="stripe-info">
-                            <span class="stripe-hex">#E6E6FA</span>
-                            <span class="stripe-name">Burgundy</span>
-                        </div>
-                    </div>
-                     <div class="palette-stripe" style="background-color: #D15F7F;">
-                         <div class="stripe-actions">
-                            <i data-lucide="heart"></i>
-                            <i data-lucide="copy"></i>
-                            <i data-lucide="trash-2"></i>
-                        </div>
-                        <div class="stripe-info">
-                            <span class="stripe-hex">#E6E6FA</span>
-                            <span class="stripe-name">Burgundy</span>
-                        </div>
-                    </div>
-                     <div class="palette-stripe" style="background-color: #DB7391;">
-                         <div class="stripe-actions">
-                            <i data-lucide="heart"></i>
-                            <i data-lucide="copy"></i>
-                            <i data-lucide="trash-2"></i>
-                        </div>
-                        <div class="stripe-info">
-                            <span class="stripe-hex">#E6E6FA</span>
-                            <span class="stripe-name">Burgundy</span>
-                        </div>
-                    </div>
-                     <div class="palette-stripe" style="background-color: #E587A3;">
-                         <div class="stripe-actions">
-                            <i data-lucide="heart"></i>
-                            <i data-lucide="copy"></i>
-                            <i data-lucide="trash-2"></i>
-                        </div>
-                        <div class="stripe-info">
-                            <span class="stripe-hex">#E6E6FA</span>
-                            <span class="stripe-name">Burgundy</span>
-                        </div>
-                    </div>
-                     <div class="palette-stripe" style="background-color: #EF9BB5;">
-                         <div class="stripe-actions">
-                            <i data-lucide="heart"></i>
-                            <i data-lucide="copy"></i>
-                            <i data-lucide="trash-2"></i>
-                        </div>
-                        <div class="stripe-info">
-                            <span class="stripe-hex">#E6E6FA</span>
-                            <span class="stripe-name">Burgundy</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- FLOATING CONTROL BAR -->
-            <div class="floating-bar">
-                <button id="generate-btn" class="generate-btn">
-                     Generate Pallet <i data-lucide="sparkles"></i>
-                </button>
-                <div class="divider"></div>
-                <div class="control-icons">
-                    <i data-lucide="palette"></i>
-                    <i data-lucide="bookmark"></i>
-                    <i data-lucide="moon"></i>
-                    <i data-lucide="eye"></i>
-                    <i data-lucide="chevron-down"></i>
-                </div>
-                <div class="record-btn"></div>
-            </div>
+        <div class="nav-footer">
+          <button
+            class="nav-item"
+            aria-label="Settings"
+            data-tooltip="Settings"
+          >
+            <i data-lucide="settings"></i>
+          </button>
+          <button class="nav-item" aria-label="Help" data-tooltip="Help">
+            <i data-lucide="circle-help"></i>
+          </button>
+        </div>
+      </nav>
 
-        </main>
+      <!-- Main Content Placeholder -->
+      <main class="main-content">
+        <!-- Content will be injected here -->
+      </main>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
+  </body>
 </html>
